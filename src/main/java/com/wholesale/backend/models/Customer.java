@@ -1,8 +1,6 @@
 package com.wholesale.backend.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -11,17 +9,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "customers")
+public class Customer {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long categoryId;
+    private String emailId;
 
-    private String categoryName;
+    private String firstName;
+
+    private String lastName;
+
+    private String phoneNumber;
+
+    private String shippingAddress;
+
+    private String billingAddress;
 
 }

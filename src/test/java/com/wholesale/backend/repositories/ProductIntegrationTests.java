@@ -21,17 +21,22 @@ import com.wholesale.backend.utils.TestDataUtil;
 public class ProductIntegrationTests {
     
     private ProductRepository productRepositoryTest;
+    private CategoryRepository categoryRepositoryTest;
 
     @Autowired
-    public ProductIntegrationTests(ProductRepository productRepositoryTest) {
+    public ProductIntegrationTests(ProductRepository productRepositoryTest, CategoryRepository categoryRepositoryTest) {
         this.productRepositoryTest = productRepositoryTest;
+        this.categoryRepositoryTest = categoryRepositoryTest;
     }
 
     @Test
-    public void testCreateProduct() {
+    public void testCreateAndFindProduct() {
         // Create a new product
-        Category category = TestDataUtil.createCategory();
-        Product product = TestDataUtil.createProduct(category);
+        Category category = TestDataUtil.createCategoryA();
+
+        categoryRepositoryTest.save(category);
+        
+        Product product = TestDataUtil.createProductA(category);
 
         productRepositoryTest.save(product);
 
@@ -39,6 +44,84 @@ public class ProductIntegrationTests {
 
         assertThat(result).isPresent();
         assertThat(result.get()).isEqualTo(product);
+    }
+
+    @Test
+    public void findAllProducts() {
+
+        Category category = TestDataUtil.createCategoryA();
+
+        categoryRepositoryTest.save(category);
+
+        Product productA = TestDataUtil.createProductA(category);
+        productRepositoryTest.save(productA);
+
+        Product productB = TestDataUtil.createProductB(category);
+        productRepositoryTest.save(productB);
+
+        Product productC = TestDataUtil.createProductC(category);
+        productRepositoryTest.save(productC);
+
+
+        Iterable<Product> result = productRepositoryTest.findAll();
+
+        assertThat(result)
+            .hasSize(3)
+            .contains(productA, productB, productC);
+
+
+    }
+
+    @Test
+    public void testUpdateProduct() {
+        // Create a new product
+        Category category = TestDataUtil.createCategoryA();
+
+        categoryRepositoryTest.save(category);
+        
+        Product product = TestDataUtil.createProductA(category);
+
+        productRepositoryTest.save(product);
+
+        Optional<Product> result = productRepositoryTest.findById(product.getProductId());
+
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(product);
+
+        // Update the product
+        Product updatedProduct = result.get();
+        updatedProduct.setStockQuantity(200L);
+
+        productRepositoryTest.save(updatedProduct);
+
+        Optional<Product> updatedResult = productRepositoryTest.findById(product.getProductId());
+
+        assertThat(updatedResult).isPresent();
+        assertThat(updatedResult.get()).isEqualTo(updatedProduct);
+    }
+
+    @Test
+    public void testDeleteProduct() {
+        // Create a new product
+        Category category = TestDataUtil.createCategoryA();
+
+        categoryRepositoryTest.save(category);
+        
+        Product product = TestDataUtil.createProductA(category);
+
+        productRepositoryTest.save(product);
+
+        Optional<Product> result = productRepositoryTest.findById(product.getProductId());
+
+        assertThat(result).isPresent();
+        assertThat(result.get()).isEqualTo(product);
+
+        // Delete the product
+        productRepositoryTest.delete(product);
+
+        Optional<Product> deletedResult = productRepositoryTest.findById(product.getProductId());
+
+        assertThat(deletedResult).isEmpty();
     }
 
 }

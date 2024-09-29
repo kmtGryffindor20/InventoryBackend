@@ -10,9 +10,9 @@ public final class TestDataUtil {
         throw new IllegalStateException("Utility class");
     }
 
-    public static Product createProduct(final Category category) {
+    public static Product createProductA(final Category category) {
         return Product.builder()
-                .productName("Product 1")
+                .productName("Product A")
                 .expiryDate(java.sql.Date.valueOf("2022-12-31"))
                 .stockQuantity(100L)
                 .costPrice(100.0)
@@ -21,15 +21,42 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static Category createCategory() {
-        return Category.builder()
-                .categoryName("Category 1")
+    public static Product createProductB(final Category category) {
+        return Product.builder()
+                .productName("Product B")
+                .expiryDate(java.sql.Date.valueOf("2022-12-31"))
+                .stockQuantity(100L)
+                .costPrice(100.0)
+                .maximumRetailPrice(150.0)
+                .category(category)
                 .build();
     }
 
-    public static Customer createCustomer() {
+    public static Product createProductC(final Category category) {
+        return Product.builder()
+                .productName("Product C")
+                .expiryDate(java.sql.Date.valueOf("2022-12-31"))
+                .stockQuantity(100L)
+                .costPrice(100.0)
+                .maximumRetailPrice(150.0)
+                .category(category)
+                .build();
+    }
+
+    public static Category createCategoryA() {
+        return Category.builder()
+                .categoryName("Category A")
+                .build();
+    }
+    public static Category createCategoryB() {
+        return Category.builder()
+                .categoryName("Category B")
+                .build();
+    }
+
+    public static Customer createCustomer(String email) {
         return Customer.builder()
-                .emailId("johndoe@gmail.com")
+                .emailId(email)
                 .firstName("John")
                 .lastName("Doe")
                 .phoneNumber("1234567890")

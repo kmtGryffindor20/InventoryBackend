@@ -37,7 +37,7 @@ public class Product {
 
     private Double maximumRetailPrice;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
 

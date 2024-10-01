@@ -1,14 +1,15 @@
 package com.wholesale.backend.models;
 
+
 import java.sql.Date;
 import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,30 +22,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
-    
+@Table(name = "employees")
+public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productId;
+    private Long employeeId;
 
-    private String productName;
+    private String firstName;
 
-    private Date expiryDate;
+    private String lastName;
 
-    private Long stockQuantity;
+    @ElementCollection
+    @CollectionTable(name = "employee_email_addresses")
+    private Set<String> emailAddress;
+    
+    private String phoneNumber;
 
-    private Double costPrice;
+    private Date hireDate;
 
-    private Double maximumRetailPrice;
+    private String designation;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
-    private Category category;
-
-    @ManyToMany
-    private Set<Manufacturer> manufacturers;
-
-
+    private Employee manager;
 
 }

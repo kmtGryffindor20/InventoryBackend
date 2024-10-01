@@ -7,9 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,30 +20,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "customer_orders")
+public class ManufacturerOrder{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productId;
-
-    private String productName;
-
-    private Date expiryDate;
-
-    private Long stockQuantity;
-
-    private Double costPrice;
-
-    private Double maximumRetailPrice;
+    private Long manufacturerOrderId;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
-    private Category category;
+    private Manufacturer orderedFrom;
 
-    @ManyToMany
-    private Set<Manufacturer> manufacturers;
+    private Date dateOfOrder;
 
-
-
+    @OneToMany
+    private Set<Product> products;
 }

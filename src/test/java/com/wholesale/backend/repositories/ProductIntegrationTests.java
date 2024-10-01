@@ -15,6 +15,8 @@ import com.wholesale.backend.models.Category;
 import com.wholesale.backend.models.Product;
 import com.wholesale.backend.utils.TestDataUtil;
 
+import jakarta.transaction.Transactional;
+
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -29,6 +31,7 @@ public class ProductIntegrationTests {
         this.categoryRepositoryTest = categoryRepositoryTest;
     }
 
+    @Transactional
     @Test
     public void testCreateAndFindProduct() {
         // Create a new product
@@ -46,6 +49,7 @@ public class ProductIntegrationTests {
         assertThat(result.get()).isEqualTo(product);
     }
 
+    @Transactional
     @Test
     public void findAllProducts() {
 
@@ -72,6 +76,7 @@ public class ProductIntegrationTests {
 
     }
 
+    @Transactional
     @Test
     public void testUpdateProduct() {
         // Create a new product
@@ -100,6 +105,7 @@ public class ProductIntegrationTests {
         assertThat(updatedResult.get()).isEqualTo(updatedProduct);
     }
 
+    @Transactional
     @Test
     public void testDeleteProduct() {
         // Create a new product

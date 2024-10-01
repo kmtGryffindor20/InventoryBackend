@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "customer_orders")
+@Table(name = "manufacturer_orders")
 public class ManufacturerOrder{
     
     @Id

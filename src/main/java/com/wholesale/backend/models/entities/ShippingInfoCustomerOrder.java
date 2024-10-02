@@ -1,4 +1,4 @@
-package com.wholesale.backend.models;
+package com.wholesale.backend.models.entities;
 
 
 
@@ -19,19 +19,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "manufacturer_order_shipping_info")
-public class ShippingInfoManufacturerOrder {
+@Table(name = "customer_order_shipping_info")
+public class ShippingInfoCustomerOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long shippingId;
+    private Long shippingInfoId;
 
-    private Date shipmentDate;
+    private Date dateOfShipping;
 
-    private Date expectedDeliveryDate;
+    private Date expectedDateOfDelivery;
 
-    private String shipmentStatus;
+    private String status;
 
     @ManyToOne
-    private ManufacturerOrder manufacturerOrder;
+    private CustomerOrder order;
 }

@@ -1,8 +1,6 @@
-package com.wholesale.backend.models;
+package com.wholesale.backend.models.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "customers")
-public class Customer {
+public class CustomerDto {
     
-    @Id
     private String emailId;
 
     private String firstName;

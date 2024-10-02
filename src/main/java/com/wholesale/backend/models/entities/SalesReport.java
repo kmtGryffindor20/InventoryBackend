@@ -1,4 +1,4 @@
-package com.wholesale.backend.models;
+package com.wholesale.backend.models.entities;
 
 
 import com.wholesale.backend.embeddables.SalesReportId;

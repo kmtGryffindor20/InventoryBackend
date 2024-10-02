@@ -1,8 +1,8 @@
 package com.wholesale.backend.utils;
 
-import com.wholesale.backend.models.Category;
-import com.wholesale.backend.models.Customer;
-import com.wholesale.backend.models.Product;
+import com.wholesale.backend.models.entities.Category;
+import com.wholesale.backend.models.entities.Customer;
+import com.wholesale.backend.models.entities.Product;
 
 public final class TestDataUtil {
     

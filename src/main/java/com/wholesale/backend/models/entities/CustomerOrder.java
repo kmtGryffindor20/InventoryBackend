@@ -1,4 +1,4 @@
-package com.wholesale.backend.models;
+package com.wholesale.backend.models.entities;
 
 import java.sql.Date;
 import java.util.Set;

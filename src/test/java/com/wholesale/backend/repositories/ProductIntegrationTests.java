@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.wholesale.backend.models.Category;
-import com.wholesale.backend.models.Product;
+import com.wholesale.backend.models.entities.Category;
+import com.wholesale.backend.models.entities.Product;
 import com.wholesale.backend.utils.TestDataUtil;
 
 import jakarta.transaction.Transactional;

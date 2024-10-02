@@ -3,6 +3,8 @@ package com.wholesale.backend.services.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.wholesale.backend.mappers.Mapper;
+import com.wholesale.backend.models.dto.EmployeeCreateDto;
 import com.wholesale.backend.models.entities.Employee;
 import com.wholesale.backend.repositories.EmployeeRepository;
 import com.wholesale.backend.services.EmployeeService;
@@ -12,8 +14,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     
     private EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    private Mapper<Employee, EmployeeCreateDto> employeeCreateMapper;
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, Mapper<Employee, EmployeeCreateDto> employeeCreateMapper) {
         this.employeeRepository = employeeRepository;
+        this.employeeCreateMapper = employeeCreateMapper;
     }
 
     @Override
@@ -22,8 +27,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public Employee createEmployee(EmployeeCreateDto employee) {
+        Employee newEmployee = employeeCreateMapper.mapToEntity(employee);
+        if (employee.getManagerId() != null) {
+            Employee manager = employeeRepository.findById(employee.getManagerId()).get();
+            System.out.println(manager.getFirstName());
+            newEmployee.setManager(manager);
+        }
+        return employeeRepository.save(newEmployee);
     }
 
     
